@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 
@@ -27,3 +28,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 // from template take header to replace in app b blade by it ,
 //take body index from template to add to app blade
 //  main of body index in template becomes yield to make the content reusable for different page
+//          @include('user.account-nav') to divide components
+
+//event.preventDefault() prevents the browser from following the link (navigating to route('logout') directly).
+//document.getElementById('logout-form').submit() triggers the form submission via JavaScript.
