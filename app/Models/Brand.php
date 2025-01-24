@@ -8,9 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class Brand extends Model
 {
-    public function getImage(): Attribute //cover image
+
+    public function getImage(): Attribute
     {
-        return Attribute::make(get: fn () => $this->image && Storage::disk('public')->exists($this->image) ? asset('storage/' . $this->image) : asset('storage/imgs/placeholder.jpg'));
+        return Attribute::make(
+            get: fn() => $this->image && Storage::disk('public')->exists($this->image)
+                ? Storage::url($this->image)
+                : asset('storage/imgs/placeholder.jpg')
+        );
     }
 
 }
