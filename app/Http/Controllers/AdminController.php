@@ -30,19 +30,20 @@ class AdminController extends Controller
         $brand->name = $name;
         $brand->slug = Str::slug($name);
 
-        // if ($request->hasFile('image')) 
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
 
-            $path = $image->storeAs('uploads/brands/originals', $fileName, 'public');
+            $thumbnailPath = Helper::generateBrandThumbnailImage($image, $fileName);
 
-            Helper::generateBrandThumbnailImage($image, $fileName);
+            $brand->image = $thumbnailPath;
+        }
 
-            $brand->image = $path;
 
         $brand->save();
 
-        return redirect()->route('admin.brands.add')->with('status', 'Brand has been added successfully!');
+        return redirect()->route('admin.brands')->with('status', 'Brand has been added successfully!');
     }
+
 
 }

@@ -15,6 +15,7 @@ class Helper{
             $constrain->aspectRatio();
 
         })->save( $destination.'/'.$imageName);
+        return 'uploads/brands/thumbnails/' . $imageName;
 
     }
 
