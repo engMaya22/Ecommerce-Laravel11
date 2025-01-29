@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +22,14 @@ Route::middleware(['auth'])->group(function(){
 });
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/admin/brands', [AdminController::class, 'brands'])->name('admin.brands');
-    Route::get('/admin/brands/add', [AdminController::class, 'addBrand'])->name('admin.brands.add');
-    Route::post('/admin/brands/store', [AdminController::class, 'brandStore'])->name('admin.brand.store');
+    Route::get('/admin/brands', [BrandController::class, 'brands'])->name('admin.brands');
+
+    Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('admin.brands.add');
+    Route::post('/admin/brands/store', [BrandController::class, 'brandStore'])->name('admin.brand.store');
+
+    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'brandEdit'])->name('admin.brands.edit');
+    Route::put('/admin/brands/update', [BrandController::class, 'brandUpdate'])->name('admin.brand.update');
+
 
 });
 
@@ -34,3 +40,4 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 //event.preventDefault() prevents the browser from following the link (navigating to route('logout') directly).
 //document.getElementById('logout-form').submit() triggers the form submission via JavaScript.
+// Storage::disk('public')  points to storage/app/public
