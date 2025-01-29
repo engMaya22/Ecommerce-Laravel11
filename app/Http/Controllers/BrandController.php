@@ -63,7 +63,14 @@ class BrandController extends Controller
 
 
         $brand->save();
-        return redirect()->route('admin.brands')->with('status','Brand has been edit successfully!');
+        return redirect()->route('admin.brands')->with('status','Brand has been edited successfully!');
+
+    }
+    public function brandDelete($id){
+        $brand =  Brand::find($id);
+        Helper::deleteOldImage($brand->image);
+        $brand->delete();
+        return redirect()->route('admin.brands')->with('status','Brand has been deleted successfully!');
 
     }
 }

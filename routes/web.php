@@ -30,6 +30,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/brands/edit/{id}', [BrandController::class, 'brandEdit'])->name('admin.brands.edit');
     Route::put('/admin/brands/update', [BrandController::class, 'brandUpdate'])->name('admin.brand.update');
 
+    Route::delete('/admin/brand/{id}/delete',[BrandController::class,'brandDelete'])->name('admin.brand.delete');
+
 
 });
 
@@ -41,3 +43,4 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 //event.preventDefault() prevents the browser from following the link (navigating to route('logout') directly).
 //document.getElementById('logout-form').submit() triggers the form submission via JavaScript.
 // Storage::disk('public')  points to storage/app/public
+//Storage::url() generates the public URL to access files stored in a specific disk. By default, it assumes you're using the public disk (which points to storage/app/public/).
