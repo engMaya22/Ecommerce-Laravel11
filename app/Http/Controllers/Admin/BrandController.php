@@ -31,7 +31,7 @@ class BrandController extends Controller
 
         $image = $request->file('image');
         $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-        $thumbnailPath = Helper::generateBrandThumbnailImage($image, $fileName);
+        $thumbnailPath = Helper::generateThumbnailImage($image, $fileName , "brands");
         $brand->image = $thumbnailPath;
 
 

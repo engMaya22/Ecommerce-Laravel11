@@ -8,10 +8,10 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class Helper{
 
-    public static function generateBrandThumbnailImage($image , $imageName){
+    public static function generateThumbnailImage($image , $imageName , $folderName){
 
           // Define the relative path inside storage/app/public/
-            $relativePath = "uploads/brands/thumbnails/{$imageName}";
+            $relativePath = "uploads/".$folderName."/thumbnails/{$imageName}";
 
             // Read and process the image
             $img = Image::read($image->path());
