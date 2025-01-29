@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BrandController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +28,18 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('admin.brands.add');
     Route::post('/admin/brands/store', [BrandController::class, 'brandStore'])->name('admin.brand.store');
 
-    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'brandEdit'])->name('admin.brands.edit');
+    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'brandEdit'])->name('admin.brand.edit');
     Route::put('/admin/brands/update', [BrandController::class, 'brandUpdate'])->name('admin.brand.update');
 
     Route::delete('/admin/brand/{id}/delete',[BrandController::class,'brandDelete'])->name('admin.brand.delete');
+
+    Route::get('/admin/categories', [CategoryController::class, 'categories'])->name('admin.categories');
+    Route::get('/admin/category/add', [CategoryController::class, 'categoryAdd'])->name('admin.category.add');
+    Route::post('/admin/category/store', [CategoryController::class, 'categoryStore'])->name('admin.category.store');
+
+    Route::get('/admin/category/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('admin.category.edit');
+    Route::put('/admin/category/update', [CategoryController::class, 'categoryUpdate'])->name('admin.category.update');
+
 
 
 });

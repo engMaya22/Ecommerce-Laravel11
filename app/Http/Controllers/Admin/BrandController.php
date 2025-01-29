@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Classes\Helper;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AddBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
 use App\Models\Brand;
