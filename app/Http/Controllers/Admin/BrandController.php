@@ -44,7 +44,6 @@ class BrandController extends Controller
     public function brandEdit($id){
         $brand = Brand::find($id);
         return view('admin.brands.edit',compact('brand'));
-
     }
     public function brandUpdate(UpdateBrandRequest $request){
         $validated = $request->validated();
@@ -57,7 +56,7 @@ class BrandController extends Controller
             Helper::deleteOldImage($brand->image);
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-            $thumbnailPath = Helper::generateBrandThumbnailImage($image, $fileName);
+            $thumbnailPath = Helper::generateThumbnailImage($image, $fileName , "brands");
             $brand->image = $thumbnailPath;
 
         }
