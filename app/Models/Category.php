@@ -12,9 +12,12 @@ class Category extends Model
     public function getImage(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->image && Storage::disk('public')->exists($this->image)
-                ? Storage::url($this->image)
+            get: fn() => $this->image&& Storage::disk('public')->exists("uploads/categories/thumbnails/".$this->image)
+                ? Storage::url("uploads/categories/thumbnails/".$this->image)
                 : asset('storage/imgs/placeholder.jpg')
         );
+    }
+    public function products(){
+        return $this->hasMany(Product::class);
     }
 }

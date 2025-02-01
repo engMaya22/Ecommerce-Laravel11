@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    public function categories(){
+    public function index(){
         $categories = Category::orderBy('id','DESC')->paginate(6);
         return view('admin.categories.index',compact('categories'));
 
@@ -33,8 +33,8 @@ class CategoryController extends Controller
 
         $image = $request->file('image');
         $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-        $thumbnailPath = Helper::generateThumbnailImage($image, $fileName ,"categories");
-        $category->image = $thumbnailPath;
+        Helper::generateThumbnailImage($image, $fileName ,"categories/thumbnails/",124 , 124);
+        $category->image = $fileName;
 
 
         $category->save();
@@ -57,8 +57,8 @@ class CategoryController extends Controller
             Helper::deleteOldImage($category->image);
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-            $thumbnailPath = Helper::generateThumbnailImage($image, $fileName , "categories");
-            $category->image = $thumbnailPath;
+            Helper::generateThumbnailImage($image, $fileName , "categories/thumbnails/",124 , 124);
+            $category->image = $fileName;
 
         }
 
@@ -68,7 +68,8 @@ class CategoryController extends Controller
     }
     public function categoryDelete($id){
         $category =  Category::find($id);
-        Helper::deleteOldImage($category->image);
+        $imagePath = "uploads/categories/thumbnails/" . $category->image;
+        Helper::deleteOldImage($imagePath);
         $category->delete();
         return redirect()->route('admin.categories')->with('status','Category has been deleted successfully!');
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class BrandController extends Controller
 {
-    public function brands(){
+    public function index(){
         $brands = Brand::orderBy('id','DESC')->paginate(10);
         return view('admin.brands.index',compact('brands'));
     }
@@ -31,9 +31,8 @@ class BrandController extends Controller
 
         $image = $request->file('image');
         $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-        $thumbnailPath = Helper::generateThumbnailImage($image, $fileName , "brands");
-        $brand->image = $thumbnailPath;
-
+        Helper::generateThumbnailImage($image, $fileName , "brands/thumbnails/",124 , 124);
+        $brand->image = $fileName;
 
         $brand->save();
 
@@ -56,8 +55,8 @@ class BrandController extends Controller
             Helper::deleteOldImage($brand->image);
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
-            $thumbnailPath = Helper::generateThumbnailImage($image, $fileName , "brands");
-            $brand->image = $thumbnailPath;
+            Helper::generateThumbnailImage($image, $fileName , "brands/thumbnails/", 124 , 124);
+            $brand->image = $fileName;
 
         }
 
@@ -68,7 +67,8 @@ class BrandController extends Controller
     }
     public function brandDelete($id){
         $brand =  Brand::find($id);
-        Helper::deleteOldImage($brand->image);
+        $imagePath = "uploads/brands/thumbnails/" . $brand->image;
+        Helper::deleteOldImage($imagePath);
         $brand->delete();
         return redirect()->route('admin.brands')->with('status','Brand has been deleted successfully!');
 

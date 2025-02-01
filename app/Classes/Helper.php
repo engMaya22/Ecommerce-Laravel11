@@ -8,22 +8,21 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class Helper{
 
-    public static function generateThumbnailImage($image , $imageName , $folderName){
+    public static function generateThumbnailImage($image , $imageName , $folderName ,$width , $height){
 
           // Define the relative path inside storage/app/public/
-            $relativePath = "uploads/".$folderName."/thumbnails/{$imageName}";
+            $relativePath = "uploads/".$folderName.$imageName;
 
             // Read and process the image
             $img = Image::read($image->path());
-            $img->cover(124, 124, 'top');
-            $img->resize(124, 124, function ($constraint) {
+            $img->cover($width, $height, 'top');
+            $img->resize($width, $height, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
             // Store the processed image in the public disk
             Storage::disk('public')->put($relativePath, (string) $img->encode());
 
-            return $relativePath;
 
     }
     public static function deleteOldImage(?string $imagePath): void
