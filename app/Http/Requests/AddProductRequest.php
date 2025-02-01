@@ -25,6 +25,7 @@ class AddProductRequest extends FormRequest
             'name' => 'required',
             'slug' => 'required|unique:products,slug',
             'main_image' => 'mimes:png,jpg,jpeg|max:2048',
+            'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Validate each file in 'images[]'
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required',

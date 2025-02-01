@@ -25,15 +25,27 @@ class ProductController extends Controller
         return view('admin.products.add',compact('categories','brands'));
     }
     public function productStore(AddProductRequest $request){
-
         $image = $request->file('main_image');
         $fileName = Carbon::now()->timestamp . '.' . $image->extension();
         Helper::generateThumbnailImage($image, $fileName ,"products/thumbnails/",104 , 104);
         Helper::generateThumbnailImage($image, $fileName ,"products/orginal/",540 , 689);
+
+        // Handle multiple images
+        $imageNames = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $img) {
+                $imageFileName = Carbon::now()->timestamp . '_' . uniqid() . '.' . $img->extension();
+                Helper::generateThumbnailImage($img, $imageFileName ,"products/thumbnails/",104 , 104);
+                Helper::generateThumbnailImage($img, $imageFileName ,"products/orginal/",540 , 689);
+                $imageNames[] = $imageFileName;
+            }
+        }
+
         Product::create([
             'name' => $request->name,
             'slug' => Str::slug($request->slug),
             'main_image' => $fileName,
+            'images' => $imageNames, // Save array of image names
             'short_description' => $request->short_description,
             'description' => $request->description,
             'regular_price' => $request->regular_price,

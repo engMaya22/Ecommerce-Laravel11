@@ -38,6 +38,11 @@
                         <div class="text-tiny">Do not exceed 100 characters when entering the
                             product name.</div>
                     </fieldset>
+                    @error('name')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
 
                     <fieldset class="name">
                         <div class="mb-10 body-title">Slug <span class="tf-color-1">*</span></div>
@@ -45,6 +50,11 @@
                         <div class="text-tiny">Do not exceed 100 characters when entering the
                             product name.</div>
                     </fieldset>
+                    @error('slug')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
 
                     <div class="gap22 cols">
                         <fieldset class="category">
@@ -60,6 +70,11 @@
                                 </select>
                             </div>
                         </fieldset>
+                        @error('category_id')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                         <fieldset class="brand">
                             <div class="mb-10 body-title">Brand <span class="tf-color-1">*</span>
                             </div>
@@ -73,6 +88,11 @@
                                 </select>
                             </div>
                         </fieldset>
+                        @error('brand_id')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                     </div>
 
                     <fieldset class="shortdescription">
@@ -85,6 +105,11 @@
                         <div class="text-tiny">Do not exceed 100 characters when entering the
                             product name.</div>
                     </fieldset>
+                    @error('short_description')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
 
                     <fieldset class="description">
                         <div class="mb-10 body-title">Description <span class="tf-color-1">*</span>
@@ -96,6 +121,14 @@
                         <div class="text-tiny">Do not exceed 100 characters when entering the
                             product name.</div>
                     </fieldset>
+                    @error('description')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
+
+
+
                 </div>
                 <div class="wg-box">
                     <fieldset>
@@ -118,6 +151,11 @@
                             </div>
                         </div>
                     </fieldset>
+                    @error('main_image')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
 
                     <fieldset>
                         <div class="mb-10 body-title">Upload Gallery Images</div>
@@ -138,6 +176,11 @@
                             </div>
                         </div>
                     </fieldset>
+                    @error('images')
+                    <span class="text-center alert alert-danger">
+                       {{$message}}
+                    </span>
+                    @enderror
 
                     <div class="cols gap22">
                         <fieldset class="name">
@@ -147,12 +190,22 @@
                                 name="regular_price" tabindex="0" value="{{old('regular_price')}}" aria-required="true"
                                 required="">
                         </fieldset>
+                        @error('regular_price')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                         <fieldset class="name">
                             <div class="mb-10 body-title">Sale Price <span
                                     class="tf-color-1">*</span></div>
                             <input class="mb-10" type="text" placeholder="Enter sale price" name="sale_price" tabindex="0" value="{{old('sale_price')}}" aria-required="true"
                                 required="">
                         </fieldset>
+                        @error('sale_price')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                     </div>
 
 
@@ -163,6 +216,11 @@
                             <input class="mb-10" type="text" placeholder="Enter SKU" name="sku"
                                 tabindex="0" value="{{old('sku')}}" aria-required="true" required="">
                         </fieldset>
+                        @error('featured')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                         <fieldset class="name">
                             <div class="mb-10 body-title">Quantity <span class="tf-color-1">*</span>
                             </div>
@@ -170,6 +228,11 @@
                                 name="quantity" tabindex="0" value="{{old('quantity')}}" aria-required="true"
                                 required="">
                         </fieldset>
+                        @error('quantity')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                     </div>
 
                     <div class="cols gap22">
@@ -182,6 +245,11 @@
                                 </select>
                             </div>
                         </fieldset>
+                        @error('featured')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                         <fieldset class="name">
                             <div class="mb-10 body-title">Featured</div>
                             <div class="mb-10 select">
@@ -191,6 +259,11 @@
                                 </select>
                             </div>
                         </fieldset>
+                        @error('featured')
+                        <span class="text-center alert alert-danger">
+                           {{$message}}
+                        </span>
+                        @enderror
                     </div>
                     <div class="cols gap10">
                         <button class="w-full tf-button" type="submit">Add product</button>
@@ -202,3 +275,43 @@
         <!-- /main-content-wrap -->
     </div>
 @endsection
+@push('scripts')
+  <script>
+    $(function(){
+        $("#myFile").on("change",function(e){
+            const photoInput = $("#myFile");
+            const [file] = this.files;
+            if(file){
+                $("#imgpreview img").attr('src',URL.createObjectURL(file));
+                $("#imgpreview").show();//jquery to make div visible
+
+            }
+
+        });
+        // images preview
+        $("#gFile").on("change",function(e){
+            const photoInput = $("#gFile");
+            const photos = this.files;
+            $.each(photos , function(key , val){
+                $("#galUpload").prepend(`<div class="item gitems">
+                     <img src="${URL.createObjectURL(val)}" />
+                    </div>`);
+
+            });
+
+        });
+
+        $("input[name='name']").on("change",function(){
+             const name = $(this).val();
+             $("input[name='slug']").val(StringToSlug(name));
+        })
+    });
+    function StringToSlug(Text){
+        return Text.toLowerCase()
+                    .replace(/[^\w\s-]/g, "") // Remove special characters
+                    .replace(/\s+/g, "-"); // Replace spaces with hyphens
+    }
+
+  </script>
+
+@endpush
