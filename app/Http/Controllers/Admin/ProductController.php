@@ -119,4 +119,20 @@ class ProductController extends Controller
 
     }
 
+    public function productDelete($id){
+
+        $product = Product::find($id);
+        Helper::deleteOldImage("uploads/products/thumbnails/" . $product->main_image);
+        Helper::deleteOldImage("uploads/products/orginal/" . $product->main_image);
+        if($product->images){
+            foreach($product->images as $img){
+                Helper::deleteOldImage("uploads/products/thumbnails/" . $img);
+                Helper::deleteOldImage("uploads/products/orginal/" . $img);
+            }
+        }
+        $product->delete();
+        return redirect()->route('admin.products')->with('status','Product has been deleted successfully!');
+
+    }
+
 }

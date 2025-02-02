@@ -42,10 +42,11 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
-    Route::get('/admin/products/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
-    Route::post('/admin/products/store', [ProductController::class, 'productStore'])->name('admin.product.store');
-    Route::get('/admin/products/edit/{id}', [ProductController::class, 'productEdit'])->name('admin.product.edit');
-    Route::put('/admin/products/update', [ProductController::class, 'productUpdate'])->name('admin.product.update');
+    Route::get('/admin/product/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
+    Route::post('/admin/product/store', [ProductController::class, 'productStore'])->name('admin.product.store');
+    Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('admin.product.edit');
+    Route::put('/admin/product/update', [ProductController::class, 'productUpdate'])->name('admin.product.update');
+    Route::delete('/admin/product/{id}/delete',[ProductController::class,'productDelete'])->name('admin.product.delete');
 
 
 
