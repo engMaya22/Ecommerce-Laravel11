@@ -54,7 +54,8 @@ class CategoryController extends Controller
         $category->slug = Str::slug($name);
 
         if ($request->hasFile('image')) {
-            Helper::deleteOldImage($category->image);
+            $imagePath = "uploads/categories/thumbnails/" . $category->image;
+            Helper::deleteOldImage($imagePath);
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
             Helper::generateThumbnailImage($image, $fileName , "categories/thumbnails/",124 , 124);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AddProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,10 +21,11 @@ class AddProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->input('id');
         return [
             'name' => 'required',
-            'slug' => 'required|unique:products,slug',
-            'main_image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'slug' => 'required|unique:products,slug,'.$id,
+            'main_image' => 'mimes:png,jpg,jpeg|max:2048',
             'images.*' => 'image|mimes:jpg,jpeg,png|max:2048', // Validate each file in 'images[]'
             'short_description' => 'required',
             'description' => 'required',

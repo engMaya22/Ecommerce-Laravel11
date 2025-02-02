@@ -61,7 +61,7 @@
                                 <td>{{$product->id}}</td>
                                 <td class="pname">
                                     <div class="image">
-                                        <img src="{{$product->getThumbnailmage}}" alt="{{$product->name}}" class="image">
+                                        <img src="{{$product->getThumbnailImage}}" alt="{{$product->name}}" class="image">
                                     </div>
                                     <div class="name">
                                         <a href="#" class="body-title-2">{{$product->name}}</a>
@@ -83,7 +83,7 @@
                                                 <i class="icon-eye"></i>
                                             </div>
                                         </a>
-                                        <a href="#">
+                                        <a href="{{route('admin.product.edit',['id'=>$product->id])}}">
                                             <div class="item edit">
                                                 <i class="icon-edit-3"></i>
                                             </div>

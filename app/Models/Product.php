@@ -13,7 +13,7 @@ class Product extends Model
           'images'=> 'array'
     ];
 
-    public function getThumbnailmage(): Attribute
+    public function getThumbnailImage(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->main_image
@@ -21,7 +21,7 @@ class Product extends Model
                 : asset('storage/imgs/placeholder.jpg')
         );
     }
-    public function getOrginalImage(): Attribute
+    public function getOrginalIImage(): Attribute
     {
         return Attribute::make(
             get: fn() => $this->main_image

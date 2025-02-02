@@ -52,7 +52,9 @@ class BrandController extends Controller
         $brand->slug = Str::slug($name);
 
         if ($request->hasFile('image')) {
-            Helper::deleteOldImage($brand->image);
+
+            $imagePath = "uploads/brands/thumbnails/" . $brand->image;
+            Helper::deleteOldImage($imagePath);
             $image = $request->file('image');
             $fileName = Carbon::now()->timestamp . '.' . $image->extension();
             Helper::generateThumbnailImage($image, $fileName , "brands/thumbnails/", 124 , 124);
