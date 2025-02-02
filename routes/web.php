@@ -40,7 +40,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::put('/admin/category/update', [CategoryController::class, 'categoryUpdate'])->name('admin.category.update');
     Route::delete('/admin/category/{id}/delete',[CategoryController::class,'categoryDelete'])->name('admin.category.delete');
 //make group name
-
+//make factory data + description html rich editor
 
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/product/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
@@ -52,6 +52,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 
     Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+    Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.product.view');
 
 
 });
