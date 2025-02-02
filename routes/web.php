@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 
 
+    Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 
 });

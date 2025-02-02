@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
+use App\Models\Product;
+use Illuminate\Http\Request;
+
+class ShopController extends Controller
+{
+   public function index(){
+    $products = Product::orderBy('created_at','DESC')->paginate(12);
+    return view('user.shop',compact('products'));
+   }
+}

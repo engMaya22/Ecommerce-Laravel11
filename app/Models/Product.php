@@ -16,12 +16,12 @@ class Product extends Model
     public function getThumbnailImage(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->main_image
+            get: fn() => $this->main_image//for admin
                 ?  Storage::url("uploads/products/thumbnails/".$this->main_image)
                 : asset('storage/imgs/placeholder.jpg')
         );
     }
-    public function getOrginalIImage(): Attribute
+    public function getOrginalIImage(): Attribute //for shop page
     {
         return Attribute::make(
             get: fn() => $this->main_image

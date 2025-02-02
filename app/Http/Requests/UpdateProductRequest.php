@@ -30,7 +30,6 @@ class UpdateProductRequest extends FormRequest
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
