@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
@@ -17,9 +18,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
+Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.product.view');
+//cart
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
+
 
 
 });
@@ -51,8 +59,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 
 
-    Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
-    Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.product.view');
+
 
 
 });
