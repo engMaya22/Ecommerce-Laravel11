@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,6 +12,7 @@ class ShopController extends Controller
 {
     public function index(Request $request){
         $size = $request->query('size') ? $request->query('size') : 12;//12 is default //get form send parameter by query head
+        $brandsFilter = $request->query('brands');
         $o_column = "";
         $o_order = "";
         $order = $request->query('order') ? $request->query('order') : -1;
@@ -36,11 +38,16 @@ class ShopController extends Controller
                     $o_column = 'id';
                     $o_order = 'DESC';
 
-
-
         }
-        $products = Product::orderBy($o_column , $o_order)->paginate($size);
-        return view('user.shop.index',compact('products','size','order'));
+        $brands = Brand::orderBy('name','ASC')->get();
+        $products = Product::when($brandsFilter , function($q , $brandsFilter){
+                             $q->whereIn('brand_id', explode(',', $brandsFilter));
+                         })
+
+
+
+                             ->orderBy($o_column , $o_order)->paginate($size);
+        return view('user.shop.index',compact('products','size','order','brands','brandsFilter'));
     }
 
     public function details($slug){
