@@ -23,6 +23,10 @@ Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.produ
 //cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increaseCartQuantity'])->name('cart.qty.increase');
+Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decreaseCartQuantity'])->name('cart.qty.decrease');
+Route::delete('/cart/remove/{rowId}',[CartController::class , 'removeItem'])->name('cart.item.remove');
+Route::delete('/cart/clear',[CartController::class , 'emptyCart'])->name('cart.empty');
 
 
 Route::middleware(['auth'])->group(function(){
