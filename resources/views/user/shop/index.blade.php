@@ -327,8 +327,18 @@
           </div>
 
           <div class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
+            <select class="order-1 w-auto py-0 border-0 shop-acs__select form-select order-md-0" aria-label="Page Size"
+            name="page_size" id="page_size" style="margin-right: 20px">
+            <option value="12" {{ $size == '12' ? 'selected' : ''}}>Show</option>
+            <option value="24"  {{ $size == '24' ? 'selected' : ''}}>24</option>
+            <option value="48"  {{ $size == '48' ? 'selected' : ''}}>48</option>
+            <option value="102"  {{ $size == '102' ? 'selected' : ''}}>102</option>
+
+
+          </select>
+
             <select class="order-1 w-auto py-0 border-0 shop-acs__select form-select order-md-0" aria-label="Sort Items"
-              name="total-number">
+              name="total-number" >
               <option selected>Default Sorting</option>
               <option value="1">Featured</option>
               <option value="2">Best selling</option>
@@ -482,11 +492,29 @@
         <div class="divider">
         </div>
         <div class="flex flex-wrap items-center justify-between gap-10 wgp-pagination">
-            {{$products->links('pagination::bootstrap-5')}}
+            {{$products->withQueryString()->links('pagination::bootstrap-5')}}
 
         </div>
       </div>
     </section>
   </main>
+  <form id="frmfilter" method="GET" action="{{route('shop.index')}}">
+    <input type="hidden" name="page" value="{{$products->currentPage()}}" />
+    <input type="hidden" id="size" name="size" value="{{$size}}" />
+  </form>
 
 @endsection
+@push('scripts')
+<script>
+    $(function(){
+        $('#page_size').on("change",function(){
+            $('#size').val($("#page_size option:selected").val());
+            $('#frmfilter').submit();
+
+        })
+
+    });
+
+</script>
+
+@endpush
