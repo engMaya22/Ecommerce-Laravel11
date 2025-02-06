@@ -168,16 +168,16 @@
             </h5>
             <div id="accordion-filter-price" class="border-0 accordion-collapse collapse show"
               aria-labelledby="accordion-heading-price" data-bs-parent="#price-filters">
-              <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="10"
-                data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" data-currency="$" />
+              <input class="price-range-slider" type="text" name="price_range" value="" data-slider-min="{{$min}}"
+                data-slider-max="{{$max}}" data-slider-step="5" data-slider-value="[{{$minPrice}},{{$maxPrice}}]" data-currency="$" />
               <div class="mt-2 price-range__info d-flex align-items-center">
                 <div class="me-auto">
                   <span class="text-secondary">Min Price: </span>
-                  <span class="price-range__min">$250</span>
+                  <span class="price-range__min">${{$min}}</span>
                 </div>
                 <div>
                   <span class="text-secondary">Max Price: </span>
-                  <span class="price-range__max">$450</span>
+                  <span class="price-range__max">${{$max}}</span>
                 </div>
               </div>
             </div>
@@ -455,49 +455,71 @@
     {{-- {{$order}} we added to to save the selected value  --}}
     <input type="hidden" id="hdnBrands" name="brands" value="{{$brandsFilter}}" />
     <input type="hidden" id="hdnCategories" name="categories" value="{{$categoriesFilter}}" />
+    <input type="hidden" id="hdnMinPrice" name="min" value="{{$minPrice}}" />
+    <input type="hidden" id="hdnMaxPrice" name="max" value="{{$maxPrice}}" />
 
   </form>
 
 @endsection
 @push('scripts')
 <script>
-    $(function(){
-        $('#page_size').on("change",function(){
-            $('#size').val($("#page_size option:selected").val());
-            $('#frmfilter').submit();
-
-        });
-        $('#orderBy').on("change",function(){
-            $('#order').val($("#orderBy option:selected").val());
-            $('#frmfilter').submit();
-
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('page_size').addEventListener('change', function () {
+            document.getElementById('size').value = this.value;
+            document.getElementById('frmfilter').submit();
         });
 
+        document.getElementById('orderBy').addEventListener('change', function () {
+            document.getElementById('order').value = this.value;
+            document.getElementById('frmfilter').submit();
+        });
 
-        $(function() {
-         $("input[name='brands']").on('change', function() {
-            let brands = [];
-            $("input[name='brands']:checked").each(function() {
-                brands.push($(this).val());  // Add each checked brand to the array
+        document.querySelectorAll("input[name='brands']").forEach(function (brandInput) {
+            brandInput.addEventListener('change', function () {
+                let brands = Array.from(document.querySelectorAll("input[name='brands']:checked"))
+                                 .map(input => input.value)
+                                 .join(',');
+
+                document.getElementById('hdnBrands').value = brands;
+                document.getElementById('frmfilter').submit();
             });
-            $('#hdnBrands').val(brands.join(','));  // Join array values with commas
-            $('#frmfilter').submit();  // Submit form once
         });
 
-        $(function(){
-          $("input[name='categories']").on('change',function(){
-             let categories = [];
-             $("input[name='categories']:checked").each(function() {
-                categories.push($(this).val());  // Add each checked brand to the array
+        document.querySelectorAll("input[name='categories']").forEach(function (categoryInput) {
+            categoryInput.addEventListener('change', function () {
+                let categories = Array.from(document.querySelectorAll("input[name='categories']:checked"))
+                                      .map(input => input.value)
+                                      .join(',');
+
+                document.getElementById('hdnCategories').value = categories;
+                document.getElementById('frmfilter').submit();
             });
-            $('#hdnCategories').val(categories.join(','));  // Join array values with commas
-            $('#frmfilter').submit();  // Submit form once
-
-          })
         });
+        // document.querySelector("input[name='price_range']").addEventListener('input', function() {
+        //     var [min, max] = this.value.split(',');
+
+        //     document.getElementById('hdnMinPrice').value = min;
+        //     document.getElementById('hdnMaxPrice').value = max;
+
+        //     setTimeout(() => {
+        //         document.getElementById('frmfilter').submit();
+        //     }, 2000);
+        // });
+        $("input[name='price_range']").on('change',function(){
+            var min = $(this).val().split(',')[0];
+            var max = $(this).val().split(',')[1];
+            $("#hdnMinPrice").val(min);
+            $("#hdnMaxPrice").val(max);
+            setTimeout(() => {
+                $('#frmfilter').submit();
+            }, 2000);
+
+        });
+
+
     });
 
-    });
+
 
 </script>
 

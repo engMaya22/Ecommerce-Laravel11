@@ -17,6 +17,11 @@ class ShopController extends Controller
         $categoriesFilter = $request->query('categories');
         $order = $request->query('order', -1);
 
+        $min = Product::min('regular_price');
+        $max = Product::max('regular_price');
+        $minPrice = $request->query('min',$min);
+        $maxPrice = $request->query('max',$max);
+
         $orderOptions = [
             1 => ['created_at', 'DESC'],
             2 => ['created_at', 'ASC'],
@@ -35,10 +40,16 @@ class ShopController extends Controller
             ->when($categoriesFilter, function ($q) use ($categoriesFilter) {
                 $q->whereIn('category_id', explode(',', $categoriesFilter));
             })
+            ->where(function($q)use($minPrice , $maxPrice){
+                $q->whereBetween('regular_price',[$minPrice , $maxPrice])
+                ->orWhereBetween('sale_price',[$minPrice , $maxPrice]);
+            })
             ->orderBy($o_column, $o_order)
             ->paginate($size);
 
-        return view('user.shop.index', compact('products', 'size', 'order', 'brands', 'brandsFilter', 'categories', 'categoriesFilter'));
+        return view('user.shop.index', compact('products', 'size', 'order', 'brands', 'brandsFilter',
+                                                'categories', 'categoriesFilter' ,
+                                                 'maxPrice','minPrice','max','min'));
     }
 
 
