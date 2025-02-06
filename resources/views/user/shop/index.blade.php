@@ -27,38 +27,23 @@
             </h5>
             <div id="accordion-filter-1" class="border-0 accordion-collapse collapse show"
               aria-labelledby="accordion-heading-1" data-bs-parent="#categories-list">
-              <div class="px-0 pt-3 pb-0 accordion-body">
+              <div class="px-0 pt-3 pb-0 accordion-body category-list">
                 <ul class="mb-0 list list-inline">
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Dresses</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Shorts</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Sweatshirts</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Swimwear</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Jackets</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">T-Shirts & Tops</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Jeans</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Trousers</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Men</a>
-                  </li>
-                  <li class="list-item">
-                    <a href="#" class="py-1 menu-link">Jumpers & Cardigans</a>
-                  </li>
+                    @foreach ($categories as $category)
+                      <li class="list-item">
+                        <span class="py-1 menu-link">
+                            <input type="checkbox" name="categories" value="{{ $category->id }}" class="chk-category"
+                                @if (in_array($category->id, explode(',', $categoriesFilter ?? ''))) checked @endif
+                                >
+                            {{ $category->name }}
+                        </span>
+                        <span class="text-right float-end">
+                            {{$category->products->count()}}
+                        </span>
+                      </li>
+                    @endforeach
+
+
                 </ul>
               </div>
             </div>
@@ -154,7 +139,7 @@
                         <li class="list-item">
                             <span class="py-1 menu-link">
                                 <input type="checkbox" name="brands" value="{{ $brand->id }}" class="chk-brand"
-                                    @if (in_array($brand->id, explode(',', $brandsFilter))) checked @endif>
+                                    @if (in_array($brand->id, explode(',', $brandsFilter ?? ''))) checked @endif>
                                 {{ $brand->name }}
                             </span>
                             <span class="text-right float-end">{{$brand->products->count()}}</span>
@@ -468,7 +453,8 @@
     <input type="hidden" id="size" name="size" value="{{$size}}" />
     <input type="hidden" id="order" name="order" value="{{$order}}" />
     {{-- {{$order}} we added to to save the selected value  --}}
-    <input type="hidden" id="hdnBrands" name="brands" />
+    <input type="hidden" id="hdnBrands" name="brands" value="{{$brandsFilter}}" />
+    <input type="hidden" id="hdnCategories" name="categories" value="{{$categoriesFilter}}" />
 
   </form>
 
@@ -489,13 +475,25 @@
 
 
         $(function() {
-    $("input[name='brands']").on('change', function() {
-        let brands = [];
-        $("input[name='brands']:checked").each(function() {
-            brands.push($(this).val());  // Add each checked brand to the array
+         $("input[name='brands']").on('change', function() {
+            let brands = [];
+            $("input[name='brands']:checked").each(function() {
+                brands.push($(this).val());  // Add each checked brand to the array
+            });
+            $('#hdnBrands').val(brands.join(','));  // Join array values with commas
+            $('#frmfilter').submit();  // Submit form once
         });
-        $('#hdnBrands').val(brands.join(','));  // Join array values with commas
-        $('#frmfilter').submit();  // Submit form once
+
+        $(function(){
+          $("input[name='categories']").on('change',function(){
+             let categories = [];
+             $("input[name='categories']:checked").each(function() {
+                categories.push($(this).val());  // Add each checked brand to the array
+            });
+            $('#hdnCategories').val(categories.join(','));  // Join array values with commas
+            $('#frmfilter').submit();  // Submit form once
+
+          })
         });
     });
 

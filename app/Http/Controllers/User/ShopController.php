@@ -10,45 +10,37 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    public function index(Request $request){
-        $size = $request->query('size') ? $request->query('size') : 12;//12 is default //get form send parameter by query head
+    public function index(Request $request)
+    {
+        $size = $request->query('size', 12);  // Default to 12 if 'size' is not present
         $brandsFilter = $request->query('brands');
-        $o_column = "";
-        $o_order = "";
-        $order = $request->query('order') ? $request->query('order') : -1;
+        $categoriesFilter = $request->query('categories');
+        $order = $request->query('order', -1);
 
-        switch($order){
-            case 1 :
-                $o_column = 'created_at';
-                $o_order = 'DESC';
-                break;
-            case 2 :
-                $o_column = 'created_at';
-                $o_order = 'ASC';
-                break;
-            case 3 :
-                    $o_column = 'sale_price';
-                    $o_order = 'ASC';
-                    break;
-            case 4 :
-                    $o_column = 'sale_price';
-                    $o_order = 'DESC';
-                    break;
-            default:
-                    $o_column = 'id';
-                    $o_order = 'DESC';
+        $orderOptions = [
+            1 => ['created_at', 'DESC'],
+            2 => ['created_at', 'ASC'],
+            3 => ['sale_price', 'ASC'],
+            4 => ['sale_price', 'DESC'],
+        ];
 
-        }
-        $brands = Brand::orderBy('name','ASC')->get();
-        $products = Product::when($brandsFilter , function($q , $brandsFilter){
-                             $q->whereIn('brand_id', explode(',', $brandsFilter));
-                         })
+        [$o_column, $o_order] = $orderOptions[$order] ?? ['id', 'DESC'];
 
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        $categories = Category::orderBy('name', 'ASC')->get();
 
+        $products = Product::when($brandsFilter, function ($q) use ($brandsFilter) {
+                $q->whereIn('brand_id', explode(',', $brandsFilter));
+            })
+            ->when($categoriesFilter, function ($q) use ($categoriesFilter) {
+                $q->whereIn('category_id', explode(',', $categoriesFilter));
+            })
+            ->orderBy($o_column, $o_order)
+            ->paginate($size);
 
-                             ->orderBy($o_column , $o_order)->paginate($size);
-        return view('user.shop.index',compact('products','size','order','brands','brandsFilter'));
+        return view('user.shop.index', compact('products', 'size', 'order', 'brands', 'brandsFilter', 'categories', 'categoriesFilter'));
     }
+
 
     public function details($slug){
         $product = Product::whereSlug($slug)->first();
