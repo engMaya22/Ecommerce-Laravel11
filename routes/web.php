@@ -36,7 +36,7 @@ Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.inde
 Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
 Route::delete('/wishlist/remove/{rowId}',[WishlistController::class , 'removeItem'])->name('wishlist.item.remove');
 Route::delete('/wishlist/clear',[WishlistController::class , 'emptyWishlist'])->name('wishlist.empty');
-
+Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class , 'moveToCart'])->name('wishlist.move.to.cart');
 
 
 Route::middleware(['auth'])->group(function(){
