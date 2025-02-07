@@ -32,7 +32,11 @@ Route::delete('/cart/clear',[CartController::class , 'emptyCart'])->name('cart.e
 
 
 //wishlist
+Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.index');
 Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
+Route::delete('/wishlist/remove/{rowId}',[WishlistController::class , 'removeItem'])->name('wishlist.item.remove');
+Route::delete('/wishlist/clear',[WishlistController::class , 'emptyWishlist'])->name('wishlist.empty');
+
 
 
 Route::middleware(['auth'])->group(function(){

@@ -410,12 +410,16 @@
                     </div>
 
                     @if (Cart::instance('wishlist')->content()->where('id',$product->id)->count()>0)
-                        <button  class="top-0 bg-transparent border-0 pc__btn-wl position-absolute end-0 js-add-wishlist filled-heart"
-                            title="Add To Wishlist">
+                    <form action="{{route('wishlist.item.remove',['rowId'=> Cart::instance('wishlist')->content()->where('id',$product->id)->first()->rowId])}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"  class="top-0 bg-transparent border-0 pc__btn-wl position-absolute end-0 js-add-wishlist filled-heart"
+                            title="Remove from Wishlist">
                             <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <use href="#icon_heart" />
                             </svg>
                         </button>
+                    </form>
                     @else
                     <form method="POST" action="{{route('wishlist.add')}}">
                         @csrf
