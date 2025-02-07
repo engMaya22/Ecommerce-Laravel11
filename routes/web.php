@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
+use Illuminate\Console\View\Components\Warn;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +29,10 @@ Route::put('/cart/increase-quantity/{rowId}', [CartController::class, 'increaseC
 Route::put('/cart/decrease-quantity/{rowId}', [CartController::class, 'decreaseCartQuantity'])->name('cart.qty.decrease');
 Route::delete('/cart/remove/{rowId}',[CartController::class , 'removeItem'])->name('cart.item.remove');
 Route::delete('/cart/clear',[CartController::class , 'emptyCart'])->name('cart.empty');
+
+
+//wishlist
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
 
 
 Route::middleware(['auth'])->group(function(){
@@ -77,3 +83,17 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 //document.getElementById('logout-form').submit() triggers the form submission via JavaScript.
 // Storage::disk('public')  points to storage/app/public
 //Storage::url() generates the public URL to access files stored in a specific disk. By default, it assumes you're using the public disk (which points to storage/app/public/).
+
+// if i have href but i want to submit form by it javascript:void(0) to href to prevent href behavoir :
+//  <form method="POST" action="{{route('wishlist.add')}}" id="wishlist-form">
+// @csrf
+// <input type="hidden"  name="id" value="{{$product->id}}"/>
+// <input type="hidden"  name="name" value="{{$product->name}}"/>
+
+// <a href="javascript:void(0)" class="menu-link menu-link_us-s add-to-wishlist"
+//                     onclick="document.getElementById('wishlist-form').submit();"><svg width="16" height="16" viewBox="0 0 20 20"
+//     fill="none" xmlns="http://www.w3.org/2000/svg">
+//     <use href="#icon_heart" />
+//   </svg><span>Add to Wishlist</span>
+// </a>
+// </form>
