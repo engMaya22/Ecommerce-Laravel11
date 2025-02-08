@@ -35,4 +35,10 @@ class CouponController extends Controller
         return redirect()->route('admin.coupons')->with('status','Coupon has been updated successfully.');
 
     }
+
+    public function couponDelete($id){
+        Coupon::find($id)->delete();
+        return redirect()->route('admin.coupons')->with('status','Coupon has been deleted successfully!');
+
+    }
 }

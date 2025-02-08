@@ -53,10 +53,9 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/coupons',[CouponController::class,'index'])->name('admin.coupons');
     Route::get('/admin/coupon/add',[CouponController::class,'couponAdd'])->name('admin.coupon.add');
     Route::post('/admin/coupon/store',[CouponController::class,'couponStore'])->name('admin.coupon.store');
-
     Route::get('/admin/coupon/edit/{id}',[CouponController::class,'couponEdit'])->name('admin.coupon.edit');
     Route::put('/admin/coupon/update',[CouponController::class,'couponUpdate'])->name('admin.coupon.update');
-
+    Route::delete('/admin/coupon/{id}/delete',[CouponController::class,'couponDelete'])->name('admin.coupon.delete');
 
     Route::get('/admin/brands', [BrandController::class, 'index'])->name('admin.brands');
     Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('admin.brands.add');
