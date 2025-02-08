@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
@@ -47,6 +48,13 @@ Route::middleware(['auth'])->group(function(){
 });
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+    //coupons
+    Route::get('/admin/coupons',[CouponController::class,'index'])->name('admin.coupons');
+    Route::get('/admin/coupon/add',[CouponController::class,'couponAdd'])->name('admin.coupon.add');
+    Route::post('/admin/coupon/store',[CouponController::class,'couponStore'])->name('admin.coupon.store');
+
+
 
     Route::get('/admin/brands', [BrandController::class, 'index'])->name('admin.brands');
     Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('admin.brands.add');
