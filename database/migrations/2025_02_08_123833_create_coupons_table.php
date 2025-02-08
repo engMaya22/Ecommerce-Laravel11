@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->enum('type',['fixed','percent']);
             $table->decimal('value');
-            $table->decimal('cart_value');
+            $table->decimal('cart_value');//apply coupon value if cart value is at least this
             $table->date('expire_at')->default(now()->toDateString());
             $table->timestamps();
         });
