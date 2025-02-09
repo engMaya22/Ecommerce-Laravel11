@@ -7,8 +7,8 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
-use App\Http\Controllers\UserController;
 use App\Http\Middleware\AuthAdmin;
 use Illuminate\Console\View\Components\Warn;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +36,9 @@ Route::post('/cart/coupon-apply', [CouponController::class, 'applyCouponCode'])-
 Route::delete('/cart/coupon-remove',[CouponController::class,'removeCouponCode'])->name('cart.coupon.remove');
 
 
+Route::post('/order-confirmation',[CartController::class,'orderConfirm'])->name('cart.confirm');
+
+
 //wishlist
 Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.index');
 Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist'])->name('wishlist.add');
@@ -47,6 +50,7 @@ Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class , 'moveT
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard', [UserController::class, 'index'])->name('user.index');
 
+    Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
 
 
 });

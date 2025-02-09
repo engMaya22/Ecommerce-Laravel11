@@ -5,13 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Surfsidemedia\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
     public function index(){
         $items = Cart::instance('cart')->content();
-        return view('user.cart',compact('items'));
+        return view('user.shop.cart',compact('items'));
     }
     public function addToCart(Request $request){
         Cart::instance('cart')->add($request->id , $request->name , $request->quantity , $request->price)->associate(Product::class);
@@ -41,5 +42,16 @@ class CartController extends Controller
         return redirect()->back();
 
     }
+
+
+    public function checkout(){
+
+        $address = auth()->user()->getDefaultAddress();
+        return view('user.shop.checkout',compact('address'));
+    }
+    public function orderConfirm(){
+        return view('user.shop.order-confirm',compact(''));
+    }
+
 
 }

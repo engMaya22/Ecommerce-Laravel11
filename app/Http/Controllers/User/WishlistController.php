@@ -12,7 +12,7 @@ class WishlistController extends Controller
 
     public function index(){
         $items = Cart::instance('wishlist')->content();
-        return view('user.wishlist',compact('items'));
+        return view('user.shop.wishlist',compact('items'));
 
 
     }

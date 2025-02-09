@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status',['pending','approved','declined','refunded'])
                    ->default('pending');
             //tracks the current state of the transaction
+            //Cash on delivery == cod
 
 
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
