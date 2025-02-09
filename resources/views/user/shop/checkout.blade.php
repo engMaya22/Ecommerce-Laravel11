@@ -148,48 +148,76 @@
                   <thead>
                     <tr>
                       <th>PRODUCT</th>
-                      <th align="right">SUBTOTAL</th>
+                      <th class="text-right">SUBTOTAL</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        Zessi Dresses x 2
-                      </td>
-                      <td align="right">
-                        $32.50
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        Kirby T-Shirt
-                      </td>
-                      <td align="right">
-                        $29.90
-                      </td>
-                    </tr>
+                    @foreach (Cart::instance('cart') as $item )
+                        <tr>
+                            <td>
+                            {{$item->name}} x {{$item->qty}}
+                            </td>
+                            <td class="text-right">
+                            ${{$item->subtotal()}}
+                            </td>
+                        </tr>
+                    @endforeach
                   </tbody>
                 </table>
-                <table class="checkout-totals">
-                  <tbody>
-                    <tr>
-                      <th>SUBTOTAL</th>
-                      <td align="right">$62.40</td>
-                    </tr>
-                    <tr>
-                      <th>SHIPPING</th>
-                      <td align="right">Free shipping</td>
-                    </tr>
-                    <tr>
-                      <th>VAT</th>
-                      <td align="right">$19</td>
-                    </tr>
-                    <tr>
-                      <th>TOTAL</th>
-                      <td align="right">$81.40</td>
-                    </tr>
-                  </tbody>
-                </table>
+                @if (Session::has('discounts'))
+                    <table class="checkout-totals">
+                        <tbody>
+                            <tr>
+                                <th>Subtotal</th>
+                                <td class="text-right">${{Cart::instance('cart')->subtotal()}}</td>
+                            </tr>
+                            <tr>
+                                <th>Discount {{Session::get('coupon')['code']}} </th>
+                                <td class="text-right">${{Session::get('discounts')['discount']}}</td>
+                            </tr>
+                            <tr>
+                                <th>Subtotal after discount</th>
+                                <td class="text-right">${{Session::get('discounts')['subtotal']}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>Shipping</th>
+                                <td class="text-right">
+                                Free
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>VAT</th>
+                                <td class="text-right">${{Session::get('discounts')['tax']}}</td>
+                            </tr>
+                            <tr>
+                                <th>Total  </th>
+                                <td class="text-right">${{Session::get('discounts')['total']}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                @else
+                    <table class="checkout-totals">
+                        <tbody>
+                            <tr>
+                            <th>SUBTOTAL</th>
+                            <td class="text-right">${{Cart::instance('cart')->subtotal()}}</td>
+                            </tr>
+                            <tr>
+                            <th>SHIPPING</th>
+                            <td class="text-right">Free shipping</td>
+                            </tr>
+                            <tr>
+                            <th>VAT</th>
+                            <td class="text-right">${{Cart::instance('cart')->tax()}}</td>
+                            </tr>
+                            <tr>
+                            <th>TOTAL</th>
+                            <td class="text-right">${{Cart::instance('cart')->total()}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                @endif
               </div>
               <div class="checkout__payment-methods">
                 <div class="form-check">

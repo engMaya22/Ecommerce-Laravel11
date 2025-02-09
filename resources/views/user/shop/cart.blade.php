@@ -158,33 +158,33 @@
                         @if (Session::has('discounts'))
                             <table class="cart-totals">
                                 <tbody>
-                                <tr>
-                                    <th>Subtotal</th>
-                                    <td>${{Cart::instance('cart')->subtotal()}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Discount {{Session::get('coupon')['code']}} </th>
-                                    <td>${{Session::get('discounts')['discount']}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Subtotal after discount</th>
-                                    <td>${{Session::get('discounts')['subtotal']}}</td>
-                                </tr>
+                                    <tr>
+                                        <th>Subtotal</th>
+                                        <td>${{Cart::instance('cart')->subtotal()}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Discount {{Session::get('coupon')['code']}} </th>
+                                        <td>${{Session::get('discounts')['discount']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Subtotal after discount</th>
+                                        <td>${{Session::get('discounts')['subtotal']}}</td>
+                                    </tr>
 
-                                <tr>
-                                    <th>Shipping</th>
-                                    <td>
-                                    Free
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>VAT</th>
-                                    <td>${{Session::get('discounts')['tax']}}</td>
-                                </tr>
-                                <tr>
-                                    <th>Total  </th>
-                                    <td>${{Session::get('discounts')['total']}}</td>
-                                </tr>
+                                    <tr>
+                                        <th>Shipping</th>
+                                        <td>
+                                        Free
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>VAT</th>
+                                        <td>${{Session::get('discounts')['tax']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Total  </th>
+                                        <td>${{Session::get('discounts')['total']}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
 
