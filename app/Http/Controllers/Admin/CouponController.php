@@ -73,4 +73,11 @@ class CouponController extends Controller
 
 
     }
+
+    public function removeCouponCode(){
+        Session::forget('coupon');
+        Session::forget('discounts');
+        return redirect()->back()->with('success','Coupon has been removed successfully!');
+
+    }
 }

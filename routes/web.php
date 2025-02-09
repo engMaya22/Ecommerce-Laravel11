@@ -33,7 +33,7 @@ Route::delete('/cart/clear',[CartController::class , 'emptyCart'])->name('cart.e
 
 
 Route::post('/cart/coupon-apply', [CouponController::class, 'applyCouponCode'])->name('cart.coupon.apply');
-
+Route::delete('/cart/coupon-remove',[CouponController::class,'removeCouponCode'])->name('cart.coupon.remove');
 
 
 //wishlist

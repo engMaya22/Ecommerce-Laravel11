@@ -100,21 +100,41 @@
                         </tbody>
                     </table>
                     <div class="cart-table-footer">
-                        <form  class="position-relative bg-body" method="POST" action="{{route('cart.coupon.apply')}}">
-                             @csrf
-                            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
-                            value="@if (Session::has('coupon'))
-                               {{ Session::get('coupon')['value']}} Applied!
-                            @endif">
-                            <input class="top-0 px-4 btn-link fw-medium position-absolute end-0 h-100" type="submit"
-                                value="APPLY COUPON">
-                            {{-- @error('coupon_code')
-                            <span class="text-center alert alert-danger">
-                                {{$message}}
-                            </span>
-                            @enderror --}}
 
-                        </form>
+                        @if (Session::has('coupon'))
+
+                            <form  class="position-relative bg-body" method="POST" action="{{route('cart.coupon.remove')}}">
+                                @csrf
+                                @method('DELETE')
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
+                                value="">
+                                <input class="top-0 px-4 btn-link fw-medium position-absolute end-0 h-100" type="submit"
+                                    value="Remove COUPON">
+                                {{-- @error('coupon_code')
+                                <span class="text-center alert alert-danger">
+                                    {{$message}}
+                                </span>
+                                @enderror --}}
+
+                            </form>
+
+                        @else
+                            <form  class="position-relative bg-body" method="POST" action="{{route('cart.coupon.apply')}}">
+                                @csrf
+                                <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code"
+                                value="">
+                                <input class="top-0 px-4 btn-link fw-medium position-absolute end-0 h-100" type="submit"
+                                    value="APPLY COUPON">
+                                {{-- @error('coupon_code')
+                                <span class="text-center alert alert-danger">
+                                    {{$message}}
+                                </span>
+                                @enderror --}}
+
+                           </form>
+
+                        @endif
+
 
                         <form action="{{route('cart.empty')}}" method="POST">
                             @csrf
