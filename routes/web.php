@@ -91,6 +91,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
 
     Route::get('/admin/orders',[OrderController::class,'index'])->name('admin.orders');
+    Route::get('/admin/order/{id}/details',[OrderController::class,'orderDetails'])->name('admin.order.details');
 
 
 

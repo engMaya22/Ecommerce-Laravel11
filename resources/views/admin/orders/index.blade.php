@@ -69,7 +69,7 @@
                                     <td class="text-center">{{$order->items->count()}}</td>
                                     <td> {{$order->delivered_date}}</td>
                                     <td class="text-center">
-                                        <a href="order-details.html">
+                                        <a href="{{route('admin.order.details',['id'=>$order->id])}}">
                                             <div class="list-icon-function view-icon">
                                                 <div class="item eye">
                                                     <i class="icon-eye"></i>
@@ -87,7 +87,6 @@
                 <div class="divider"></div>
                 <div class="flex flex-wrap items-center justify-between gap10 wgp-pagination">
                     {{$orders->links('pagination::bootstrap-5')}}
-
 
                 </div>
             </div>
