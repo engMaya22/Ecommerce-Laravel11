@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\ShopController;
@@ -89,7 +90,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::delete('/admin/product/{id}/delete',[ProductController::class,'productDelete'])->name('admin.product.delete');
 
 
-
+    Route::get('/admin/orders',[OrderController::class,'index'])->name('admin.orders');
 
 
 
