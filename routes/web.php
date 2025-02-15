@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\User\CartController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
@@ -52,6 +53,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/order-place',[CartController::class,'placeOrder'])->name('order.place');
     Route::get('/order-confirmation',[CartController::class,'orderConfirm'])->name('order.confirm');
 
+    Route::get('/account-orders',[UserOrderController::class,'index'])->name('user.orders');
+    Route::get('/order/{order_id}/details',[UserOrderController::class,'details'])->name('user.order.details');
 
 
 });

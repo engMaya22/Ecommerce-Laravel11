@@ -56,4 +56,7 @@ class User extends Authenticatable
                     ->whereIsDefault(true)
                     ->first();
     }
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
 }
