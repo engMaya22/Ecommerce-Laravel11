@@ -24,7 +24,6 @@ class Helper{
             // Store the processed image in the public disk
             Storage::disk('public')->put($relativePath, (string) $img->encode());
 
-
     }
     public static function deleteOldImage(?string $imagePath): void
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\User\ShopController;
@@ -66,21 +67,21 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/coupons',[CouponController::class,'index'])->name('admin.coupons');
     Route::get('/admin/coupon/add',[CouponController::class,'couponAdd'])->name('admin.coupon.add');
     Route::post('/admin/coupon/store',[CouponController::class,'couponStore'])->name('admin.coupon.store');
-    Route::get('/admin/coupon/edit/{id}',[CouponController::class,'couponEdit'])->name('admin.coupon.edit');
+    Route::get('/admin/coupon/{id}/edit',[CouponController::class,'couponEdit'])->name('admin.coupon.edit');
     Route::put('/admin/coupon/update',[CouponController::class,'couponUpdate'])->name('admin.coupon.update');
     Route::delete('/admin/coupon/{id}/delete',[CouponController::class,'couponDelete'])->name('admin.coupon.delete');
 
     Route::get('/admin/brands', [BrandController::class, 'index'])->name('admin.brands');
     Route::get('/admin/brands/add', [BrandController::class, 'addBrand'])->name('admin.brands.add');
     Route::post('/admin/brands/store', [BrandController::class, 'brandStore'])->name('admin.brand.store');
-    Route::get('/admin/brands/edit/{id}', [BrandController::class, 'brandEdit'])->name('admin.brand.edit');
+    Route::get('/admin/brands/{id}/edit', [BrandController::class, 'brandEdit'])->name('admin.brand.edit');
     Route::put('/admin/brands/update', [BrandController::class, 'brandUpdate'])->name('admin.brand.update');
     Route::delete('/admin/brand/{id}/delete',[BrandController::class,'brandDelete'])->name('admin.brand.delete');
 
     Route::get('/admin/categories', [CategoryController::class, 'index'])->name('admin.categories');
     Route::get('/admin/category/add', [CategoryController::class, 'categoryAdd'])->name('admin.category.add');
     Route::post('/admin/category/store', [CategoryController::class, 'categoryStore'])->name('admin.category.store');
-    Route::get('/admin/category/edit/{id}', [CategoryController::class, 'categoryEdit'])->name('admin.category.edit');
+    Route::get('/admin/category/{id}/edit', [CategoryController::class, 'categoryEdit'])->name('admin.category.edit');
     Route::put('/admin/category/update', [CategoryController::class, 'categoryUpdate'])->name('admin.category.update');
     Route::delete('/admin/category/{id}/delete',[CategoryController::class,'categoryDelete'])->name('admin.category.delete');
 //make group name
@@ -89,7 +90,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/products', [ProductController::class, 'index'])->name('admin.products');
     Route::get('/admin/product/add', [ProductController::class, 'productAdd'])->name('admin.products.add');
     Route::post('/admin/product/store', [ProductController::class, 'productStore'])->name('admin.product.store');
-    Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit'])->name('admin.product.edit');
+    Route::get('/admin/product/{id}/edit', [ProductController::class, 'productEdit'])->name('admin.product.edit');
     Route::put('/admin/product/update', [ProductController::class, 'productUpdate'])->name('admin.product.update');
     Route::delete('/admin/product/{id}/delete',[ProductController::class,'productDelete'])->name('admin.product.delete');
 
@@ -98,6 +99,12 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin/order/{id}/details',[OrderController::class,'orderDetails'])->name('admin.order.details');
     Route::put('/admin/order/status-update',[OrderController::class,'orderStatusUpdate'])->name('admin.order.update');
 
+    Route::get('/admin/slides', [SlideController::class, 'index'])->name('admin.slides');
+    Route::get('/admin/slides/add', [SlideController::class, 'slideAdd'])->name('admin.slides.add');
+    Route::post('/admin/slides/store', [SlideController::class, 'slideStore'])->name('admin.slides.store');
+    Route::get('/admin/slide/{id}/edit', [SlideController::class, 'slideEdit'])->name('admin.slide.edit');
+    Route::put('/admin/slide/update', [SlideController::class, 'slideUpdate'])->name('admin.slide.update');
+    Route::delete('/admin/slide/{id}/delete', [SlideController::class, 'slideDelete'])->name('admin.slide.delete');
 
 
 });
@@ -110,7 +117,8 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 //event.preventDefault() prevents the browser from following the link (navigating to route('logout') directly).
 //document.getElementById('logout-form').submit() triggers the form submission via JavaScript.
 // Storage::disk('public')  points to storage/app/public
-//Storage::url() generates the public URL to access files stored in a specific disk. By default, it assumes you're using the public disk (which points to storage/app/public/).
+//Storage::url() generates the public URL to access files stored in a specific disk. By default,
+// it assumes you're using the public disk (which points to storage/app/public/).
 
 // if i have href but i want to submit form by it javascript:void(0) to href to prevent href behavoir :
 //  <form method="POST" action="{{route('wishlist.add')}}" id="wishlist-form">
