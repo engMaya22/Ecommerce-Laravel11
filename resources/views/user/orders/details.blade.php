@@ -149,6 +149,9 @@
                           </div>
                         </div>
                         <div class="table-responsive">
+                            @if (Session::has('status'))
+                             <p class="alert alert-success"> {{ Session::get('status') }}</p>
+                            @endif
                           <table class="table table-bordered">
                             <tbody>
                               <tr>
@@ -299,13 +302,16 @@
                         </div>
                       </div>
 
-                      <div class="mt-5 text-right wg-box">
-                        <form action="http://localhost:8000/account-order/cancel-order" method="POST">
-                          <input type="hidden" name="_token" value="3v611ELheIo6fqsgspMOk0eiSZjncEeubOwUa6YT" autocomplete="off">
-                          <input type="hidden" name="_method" value="PUT"> <input type="hidden" name="order_id" value="1">
-                          <button type="submit" class="btn btn-danger">Cancel Order</button>
-                        </form>
-                      </div>
+                      @if ($order->status === 'ordered')
+                        <div class="mt-5 text-right wg-box">
+                            <form action="{{route('user.order.cancel')}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="id" value="{{$order->id}}">
+                            <button type="button" class="btn btn-danger order-cancel">Cancel Order</button>
+                            </form>
+                        </div>
+                      @endif
 
                 </div>
 
@@ -315,3 +321,27 @@
 
 
 @endsection
+
+@push('scripts')
+<script>
+    $(function(){
+        $('.order-cancel').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).closest('form');
+            swal({
+                title :'Are you sure',
+                text : 'You want to cancel this order?',
+                icon : 'warning',
+                buttons : ['No', 'Yes'],
+                confirmationButtonColor : '#dc3545'
+            }).then(function(result){
+                if(result){
+                    form.submit();
+                }
+            })
+
+        })
+
+    });
+</script>
+@endpush

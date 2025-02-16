@@ -27,4 +27,20 @@ class OrderController extends Controller
 
 
     }
+
+    public function orderStatusUpdate(Request $request){
+        $order = Order::find($request->id);
+        $transaction = $order->transaction;
+
+        $order->update([
+           'status' => 'canceled',
+           'canceled_date' => now()
+        ]);
+        $transaction->update([
+            'status' => 'declined'
+        ]);
+        return redirect()->back()->with('status','Order has been canceled succesfully');
+
+    }
+
 }

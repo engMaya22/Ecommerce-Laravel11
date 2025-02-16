@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/account-orders',[UserOrderController::class,'index'])->name('user.orders');
     Route::get('/order/{order_id}/details',[UserOrderController::class,'details'])->name('user.order.details');
+    Route::put('/order/cancel',[UserOrderController::class,'orderStatusUpdate'])->name('user.order.cancel');
 
 
 });
@@ -95,6 +96,7 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 
     Route::get('/admin/orders',[OrderController::class,'index'])->name('admin.orders');
     Route::get('/admin/order/{id}/details',[OrderController::class,'orderDetails'])->name('admin.order.details');
+    Route::put('/admin/order/status-update',[OrderController::class,'orderStatusUpdate'])->name('admin.order.update');
 
 
 
