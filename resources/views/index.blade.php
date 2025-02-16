@@ -11,71 +11,35 @@
         "loop": true
       }'>
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="overflow-hidden position-relative h-100">
-            <div class="bottom-0 slideshow-character position-absolute pos_right-center">
-              <img loading="lazy" src="{{asset('assets/images/home/demo3/slideshow-character1.png')}}"width="542" height="733"
-                alt="Woman Fashion 1"
-                class="w-auto h-auto slideshow-character__img animate animate_fade animate_btt animate_delay-9" />
-              <div class="character_markup type2">
-                <p
-                  class="mb-0 text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10">
-                  Dresses</p>
+
+        @foreach ($slides as $slide )
+          <div class="swiper-slide">
+            <div class="overflow-hidden position-relative h-100">
+              <div class="bottom-0 slideshow-character position-absolute pos_right-center">
+                <img loading="lazy" src="{{$slide->getImage}}"width="542" height="733"
+                  alt="{{$slide->title}}"
+                  class="w-auto h-auto slideshow-character__img animate animate_fade animate_btt animate_delay-9" />
+                <div class="character_markup type2">
+                  <p
+                    class="mb-0 text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10">
+                    {{$slide->tagline}}</p>
+                </div>
+              </div>
+              <div class="container slideshow-text position-absolute start-50 top-50 translate-middle">
+                <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
+                  New Arrivals</h6>
+                <h2 class="mb-0 h1 fw-normal animate animate_fade animate_btt animate_delay-5">{{$slide->title}}</h2>
+                <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">{{$slide->subtitle}}</h2>
+                <a href="{{$slide->link}}"
+                  class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
+                  Now</a>
               </div>
             </div>
-            <div class="container slideshow-text position-absolute start-50 top-50 translate-middle">
-              <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                New Arrivals</h6>
-              <h2 class="mb-0 h1 fw-normal animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-              <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-              <a href="#"
-                class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                Now</a>
-            </div>
           </div>
-        </div>
 
-        <div class="swiper-slide">
-          <div class="overflow-hidden position-relative h-100">
-            <div class="bottom-0 slideshow-character position-absolute pos_right-center">
-              <img loading="lazy" src="{{asset('assets/images/slideshow-character1.png')}}"width="400" height="733"
-                alt="Woman Fashion 1"
-                class="w-auto h-auto slideshow-character__img animate animate_fade animate_btt animate_delay-9" />
-              <div class="character_markup">
-                <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Summer
-                </p>
-              </div>
-            </div>
-            <div class="container slideshow-text position-absolute start-50 top-50 translate-middle">
-              <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                New Arrivals</h6>
-              <h2 class="mb-0 h1 fw-normal animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-              <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-              <a href="#"
-                class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                Now</a>
-            </div>
-          </div>
-        </div>
+        @endforeach
 
-        <div class="swiper-slide">
-          <div class="overflow-hidden position-relative h-100">
-            <div class="bottom-0 slideshow-character position-absolute pos_right-center">
-              <img loading="lazy" src="{{asset('assets/images/slideshow-character2.png')}}"width="400" height="690"
-                alt="Woman Fashion 2"
-                class="w-auto h-auto slideshow-character__img animate animate_fade animate_rtl animate_delay-10" />
-            </div>
-            <div class="container slideshow-text position-absolute start-50 top-50 translate-middle">
-              <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-                New Arrivals</h6>
-              <h2 class="mb-0 h1 fw-normal animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-              <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
-              <a href="#"
-                class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-                Now</a>
-            </div>
-          </div>
-        </div>
+
       </div>
 
       <div class="container">

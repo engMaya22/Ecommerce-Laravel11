@@ -16,4 +16,8 @@ class Slide extends Model
                            ? asset('storage/' . $this->image)
                            : asset('img/placeholder.jpg'));
     }
+    public function scopeActive($query)//
+    {
+        $query->whereStatus(true);
+    }
 }
