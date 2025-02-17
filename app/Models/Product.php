@@ -30,6 +30,11 @@ class Product extends Model
         );
     }
 
+    public function scopeFeatured($query)//
+    {
+        $query->whereFeatured(true);
+    }
+
 
     public function category(){
         return $this->belongsTo(Category::class);

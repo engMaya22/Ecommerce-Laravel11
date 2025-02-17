@@ -29,6 +29,7 @@ class HomeController extends Controller
         $slides = Slide::active()->get()->take(3);
         $categories = Category::orderBy('name')->get();
         $productOnSale = Product::whereNotNull('sale_price')->inRandomOrder()->get()->take(8);
-        return view('index',compact('slides','categories','productOnSale'));
+        $featuredProducts = Product::featured()->get()->take(8);
+        return view('index',compact('slides','categories','productOnSale','featuredProducts'));
     }
 }
