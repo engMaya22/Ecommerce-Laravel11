@@ -69,6 +69,11 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
+    Route::get('/admin/contacts', [AdminController::class, 'contacts'])->name('admin.contacts');
+    Route::delete('/admin/contacts/{id}/delete', [AdminController::class, 'contactDelete'])->name('admin.contact.delete');
+
+
+
     //coupons
     Route::get('/admin/coupons',[CouponController::class,'index'])->name('admin.coupons');
     Route::get('/admin/coupon/add',[CouponController::class,'couponAdd'])->name('admin.coupon.add');
