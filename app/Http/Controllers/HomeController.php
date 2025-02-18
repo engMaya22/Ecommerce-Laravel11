@@ -39,6 +39,9 @@ class HomeController extends Controller
     public function contacts(){
         return view('contact');
     }
+    public function aboutUs(){
+        return view('about-us');
+    }
 
-   
+
 }

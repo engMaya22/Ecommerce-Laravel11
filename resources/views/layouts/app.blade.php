@@ -285,7 +285,7 @@
       <nav
         class="overflow-auto header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body">
         <div class="container">
-          <form action="#" method="GET" class="mt-4 mb-3 search-field position-relative">
+          {{-- <form action="#" method="GET" class="mt-4 mb-3 search-field position-relative">
             <div class="position-relative">
               <input class="border search-field__input w-100 rounded-1" type="text" name="search-keyword"
                 placeholder="Search products" />
@@ -301,7 +301,7 @@
             <div class="m-0 position-absolute start-0 top-100 w-100">
               <div class="search-result"></div>
             </div>
-          </form>
+          </form> --}}
         </div>
 
         <div class="container">
@@ -317,7 +317,7 @@
                 <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
               </li>
               <li class="navigation__item">
-                <a href="about.html" class="navigation__link">About</a>
+                <a href="{{route('home.about-us')}}" class="navigation__link">About</a>
               </li>
               <li class="navigation__item">
                 <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
@@ -406,7 +406,7 @@
                 <a href="{{route('cart.index')}}" class="navigation__link">Cart</a>
               </li>
               <li class="navigation__item">
-                <a href="about.html" class="navigation__link">About</a>
+                <a href="{{route('home.about-us')}}" class="navigation__link">About</a>
               </li>
               <li class="navigation__item">
                 <a href="{{route('home.contact')}}" class="navigation__link">Contact</a>
@@ -415,7 +415,7 @@
           </nav>
 
           <div class="header-tools d-flex align-items-center">
-            <div class="header-tools__item hover-container">
+            {{-- <div class="header-tools__item hover-container">
               <div class="js-hover__open position-relative">
                 <a class="js-search-popup search-field__actor" href="#">
                   <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -424,10 +424,10 @@
                   </svg>
                   <i class="btn-icon btn-close-lg"></i>
                 </a>
-              </div>
+              </div> --}}
 
               <div class="search-popup js-hidden-content">
-                <form action="#" method="GET" class="container search-field">
+                {{-- <form action="#" method="GET" class="container search-field">
                   <p class="mb-4 text-uppercase text-secondary fw-medium">What are you looking for?</p>
                   <div class="position-relative">
                     <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
@@ -457,7 +457,7 @@
 
                     <div class="search-result row row-cols-5"></div>
                   </div>
-                </form>
+                </form> --}}
               </div>
             </div>
 

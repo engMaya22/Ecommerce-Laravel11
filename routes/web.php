@@ -28,6 +28,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/contact-us', [HomeController::class, 'contacts'])->name('home.contact');
 Route::post('/contact-us', [UserController::class, 'contactAdd'])->name('user.contact.add');
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('home.about-us');
+
 
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
