@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactUsRequest;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Slide;
 use Illuminate\Http\Request;
@@ -32,4 +34,11 @@ class HomeController extends Controller
         $featuredProducts = Product::featured()->get()->take(8);
         return view('index',compact('slides','categories','productOnSale','featuredProducts'));
     }
+
+
+    public function contacts(){
+        return view('contact');
+    }
+
+   
 }

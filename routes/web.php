@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\User\ShopController;
@@ -24,6 +25,11 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+Route::get('/contact-us', [HomeController::class, 'contacts'])->name('home.contact');
+Route::post('/contact-us', [UserController::class, 'contactAdd'])->name('user.contact.add');
+
+
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.product.view');
 //cart
