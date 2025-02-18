@@ -148,18 +148,18 @@
 
 
                                 <li class="menu-item">
-                                    <a href="users.html" class="">
+                                    <a href="{{route('users.all')}}" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
-                                        <div class="text">User</div>
+                                        <div class="text">Users</div>
                                     </a>
                                 </li>
 
-                                <li class="menu-item">
+                                {{-- <li class="menu-item">
                                     <a href="settings.html" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
-                                </li>
+                                </li> --}}
 
                                 <li class="menu-item">
                                    <form method="POST" id="logout-form" action="{{route('logout')}}">
@@ -277,12 +277,12 @@
                                                         <div class="image no-bg">
                                                             <img src="images/products/21.png" alt="">
                                                         </div>
-                                                        <div class="flex items-center justify-between flex-grow gap20">
+                                                        {{-- <div class="flex items-center justify-between flex-grow gap20">
                                                             <div class="name">
                                                                 <a href="product-list.html" class="body-text">Kristin
                                                                     Watson</a>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                     </li>
                                                     <li class="mb-10">
                                                         <div class="divider"></div>
@@ -391,7 +391,7 @@
 
 
 
-                                <div class="popup-wrap user type-header">
+                                {{-- <div class="popup-wrap user type-header">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
@@ -450,7 +450,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -73,6 +74,11 @@ class AdminController extends Controller
     public function contactDelete($id){
         Contact::find($id)->delete();
         return redirect()->back()->with('status','Contact has been deleted successfully!');
+    }
+
+    public function usersAll(){
+        $users = User::with('orders')->paginate(10);
+        return view('admin.users.index',compact('users'));
     }
 
 
