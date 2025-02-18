@@ -68,38 +68,47 @@
             </svg>
           </span>
           <input type="hidden" name="rate" id="rating-value" value="0">
-
-
+            <div class="mt-2">
+                @error('rate')
+                <span class="p-2 text-center alert-danger">
+                {{$message}}
+                </span>
+                @enderror
+            </div>
         </div>
-        @error('rate')
-        <span class="text-center alert alert-danger">
-        {{$message}}
-        </span>
-        @enderror
-        <div class="mb-4">
+
+        <div class="mt-4 mb-4">
           <textarea id="form-input-review" name="comment" class="form-control form-control_gray" placeholder="Your Review"
             cols="30" rows="8">{{old('comment')}}</textarea>
+            <div  class="mt-2">
+                @error('comment')
+                <span class="p-2 my-20 text-center alert-danger">
+                {{$message}}
+                </span>
+                @enderror
+            </div>
+
 
         </div>
-        @error('comment')
-            <span class="text-center alert alert-danger">
-            {{$message}}
-            </span>
-        @enderror
-        <div class="mt-2 mb-4 form-label-fixed">
+
+        <div class="mt-4 mb-4 form-label-fixed">
           <label for="form-input-name" class="form-label">Name *</label>
           <input id="form-input-name" value="{{old('name')}}" name="name" class="form-control form-control-md form-control_gray">
+           <div  class="mt-2">
+            @error('name')
+            <span class="p-2 text-center alert-danger">
+               {{$message}}
+            </span>
+           @enderror
+           </div>
         </div>
-        @error('name')
-        <span class="text-center alert alert-danger">
-           {{$message}}
-        </span>
-       @enderror
-        {{-- <div class="mb-4 form-label-fixed">
+
+
+        {{-- <div class="mt-4 mb-4 form-label-fixed">
           <label for="form-input-email" class="form-label">Email address *</label>
           <input id="form-input-email" name="email" class="form-control form-control-md form-control_gray">
         </div> --}}
-        {{-- <div class="mb-4 form-check">
+        {{-- <div class="mt-4 mb-4 form-check">
           <input class="form-check-input form-check-input_fill" type="checkbox" value="" id="remember_checkbox">
           <label class="form-check-label" for="remember_checkbox">
             Save my name, email, and website in this browser for the next time I comment.

@@ -92,7 +92,7 @@
         </div>
 
 
-        <div class="accordion" id="size-filters">
+        {{-- <div class="accordion" id="size-filters">
           <div class="pb-3 mb-4 accordion-item">
             <h5 class="accordion-header" id="accordion-heading-size">
               <button class="p-0 border-0 accordion-button fs-5 text-uppercase" type="button" data-bs-toggle="collapse"
@@ -120,7 +120,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> --}}
 
 
         <div class="accordion" id="brand-filters">
@@ -406,7 +406,7 @@
                           <use href="#icon_star" />
                         </svg>
                       </div>
-                      <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
+                      <span class="reviews-note text-lowercase text-secondary ms-1">{{$product->reviews_count}}  reviews</span>
                     </div>
 
                     @if (Cart::instance('wishlist')->content()->where('id',$product->id)->count()>0)

@@ -105,7 +105,7 @@
                 <use href="#icon_star" />
               </svg>
             </div>
-            <span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>
+            <span class="reviews-note text-lowercase text-secondary ms-1">{{$product->reviews_count}} reviews</span>
           </div>
           <div class="product-single__price">
             <span class="current-price">
