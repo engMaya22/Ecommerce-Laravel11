@@ -14,6 +14,7 @@ use App\Http\Controllers\User\ShopController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Middleware\AuthAdmin;
+use App\View\Components\Shop\Review;
 use Illuminate\Console\View\Components\Warn;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::post('/contact-us', [UserController::class, 'contactAdd'])->name('user.co
 Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('home.about-us');
 
 
+Route::post('/review-add', [UserController::class, 'reviewSubmit'])->name('user.review.add');
 
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{slug}', [ShopController::class, 'details'])->name('shop.product.view');

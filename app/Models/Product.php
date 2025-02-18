@@ -12,6 +12,13 @@ class Product extends Model
     protected $casts= [
           'images'=> 'array'
     ];
+    protected $appends = ['reviews_count']; 
+
+    public function getReviewsCountAttribute(): int
+    {
+        return $this->reviews()->count();
+    }
+
 
     public function getThumbnailImage(): Attribute
     {
@@ -41,5 +48,9 @@ class Product extends Model
     }
     public function brand(){
         return $this->belongsTo(Brand::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
     }
 }
