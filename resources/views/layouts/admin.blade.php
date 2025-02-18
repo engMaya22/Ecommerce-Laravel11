@@ -191,13 +191,13 @@
 
 
                                 <form class="flex-grow form-search">
-                                    <fieldset class="name">
+                                    {{-- <fieldset class="name">
                                         <input type="text" placeholder="Search here..." class="show-search" name="name"
                                             tabindex="2" value="" aria-required="true" required="">
                                     </fieldset>
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>
-                                    </div>
+                                    </div> --}}
                                     <div class="box-content-search" id="box-content-search">
                                         <ul class="mb-24">
                                             <li class="mb-14">
@@ -321,7 +321,7 @@
                             </div>
                             <div class="header-grid">
 
-                                <div class="popup-wrap message type-header">
+                                {{-- <div class="popup-wrap message type-header">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -386,7 +386,7 @@
                                             <li><a href="#" class="w-full tf-button">View all</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
 
 
 
