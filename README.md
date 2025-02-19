@@ -46,8 +46,9 @@ Bash
 
    composer install
    npm install
-   
+   php artisan key:generate
 
+   
 4. Set up your .env file and database configuration.
 
 5. Run migrations:
