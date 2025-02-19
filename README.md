@@ -30,7 +30,7 @@ This is a fully functional e-commerce platform built using Laravel for the backe
    
 Bash
 
-   git clone https://github.com/yourusername/ecommerce-project.git
+   git clone https://github.com/engMaya22/Ecommerce-Laravel11.git
    
 
 2. Navigate to the project directory:
