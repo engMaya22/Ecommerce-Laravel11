@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditSettingRequest;
 use App\Models\Contact;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -82,6 +84,27 @@ class AdminController extends Controller
     }
 
 
+    public function settingsGet(){
+        $user = auth()->user();
+        return view('admin.setting',compact('user'));
+    }
+
+    public function settingsUpdate(EditSettingRequest $request){
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->mobile = $request->mobile;
+
+        if ($request->filled('new_password')) {
+            $user->password = Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        return redirect()->back()->with('success', 'Settings updated successfully.');
+
+
+    }
 
 
 }

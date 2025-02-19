@@ -72,6 +72,9 @@ Route::middleware(['auth'])->group(function(){
 });
 Route::middleware(['auth',AuthAdmin::class])->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/settings', [AdminController::class, 'settingsGet'])->name('admin.settings');
+    Route::put('/settings', [AdminController::class, 'settingsUpdate'])->name('admin.settings.update');
+
 
     Route::get('/admin/contacts', [AdminController::class, 'contacts'])->name('admin.contacts');
     Route::delete('/admin/contacts/{id}/delete', [AdminController::class, 'contactDelete'])->name('admin.contact.delete');
@@ -156,4 +159,5 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 //html content as description of product from admin with addiotional field to be dynamic
 //increase quantity just to avaiable -> its better to make cart service not package
 //handle address feature
-//handle setting data with address
+//handle address for user
+//work on search feature for admin  pages
