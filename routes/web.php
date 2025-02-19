@@ -149,3 +149,11 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
 //   </svg><span>Add to Wishlist</span>
 // </a>
 // </form>
+
+
+//to do :
+//gallery products more flexible to delete from selected !
+//html content as description of product from admin with addiotional field to be dynamic
+//increase quantity just to avaiable -> its better to make cart service not package
+//handle address feature
+//handle setting data with address
